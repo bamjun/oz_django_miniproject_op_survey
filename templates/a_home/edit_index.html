@@ -1,0 +1,28 @@
+{% extends 'layouts/box.html' %}
+{% load static %}
+
+{% block content %}
+
+<h2>참여자 정보 수정</h2>
+<form id="participantForm" method="post" action="{% url 'home' %}">
+  {% csrf_token %}
+  <div>
+    <label for="name">이름:</label>
+    <input type="text" id="name" name="name" value="{{ participant.name }}" required />
+  </div>
+  <div>
+    <label for="age">나이:</label>
+    <input type="number" id="age" name="age" value="{{ participant.age }}" required />
+  </div>
+  <div>
+    <label for="gender">성별:</label>
+    <select id="gender" name="gender" required>
+      <option value="male" {% if participant.gender == "male" %}selected{% endif %}>남성</option>
+      <option value="female" {% if participant.gender == "female" %}selected{% endif %}>여성</option>
+      <option value="other" {% if participant.gender == "other" %}selected{% endif %}>기타</option>
+    </select>
+  </div>
+  <button type="submit">정보 수정</button>
+</form>
+
+{% endblock %}
