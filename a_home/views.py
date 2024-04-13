@@ -9,9 +9,13 @@ from django.utils import timezone
 import json
 from django.utils.dateparse import parse_datetime
 
+# @login_required
+def home(request):
+    return render(request, "a_home/index.html")
+
 
 @login_required
-def home(request):
+def home1(request):
     if request.method == "POST":
         name = request.POST.get("name")
         age = request.POST.get("age")
