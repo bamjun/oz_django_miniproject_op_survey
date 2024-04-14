@@ -1,29 +1,43 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-class Participant(models.Model):
-    # user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='participant')
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='participant')
-    name = models.CharField(max_length=50)
-    age = models.IntegerField()
-    gender = models.CharField(max_length=10)
-    created_at = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return self.name
 
 class Question(models.Model):
     content = models.CharField(max_length=255)
-    order_num = models.IntegerField(default=0)
+    mbtidic = models.CharField(max_length=2)
     is_active = models.BooleanField(default=True)
 
     def __str__(self):
-        return self.content
+        return f"{self.content} - {self.mbtidic}"
+
 
 class Quiz(models.Model):
-    participant = models.ForeignKey(Participant, on_delete=models.CASCADE, related_name='quizzes')
-    question = models.ForeignKey(Question, on_delete=models.CASCADE, related_name='quizzes')
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="user")
+    question = models.ForeignKey(
+        Question, on_delete=models.CASCADE, related_name="quizzes"
+    )
     chosen_answer = models.CharField(max_length=255)
 
     def __str__(self):
-        return f"{self.participant.name} - {self.question.content}"
+        return f"{self.user.username} - {self.question.content}"
+
+
+class MBTIType(models.Model):
+    type_code = models.CharField(max_length=4, unique=True)
+    description = models.TextField()
+
+    def __str__(self):
+        return f"{self.type_code} - {self.description}"
+
+
+class MBTIResponse(models.Model):
+    user = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name="mbti_responses"
+    )
+    question = models.ForeignKey(
+        Question, on_delete=models.CASCADE, related_name="mbti_questions"
+    )
+    answer = models.CharField(max_length=1)  # 예: 'E', 'I', 'N', 'S', 등등
+
+    def __str__(self):
+        return f"{self.user.username} - {self.question} - {self.answer}"

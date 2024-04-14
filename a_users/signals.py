@@ -10,13 +10,7 @@ def user_postsave(sender, instance, created, **kwargs):
     user = instance
 
     # add profile if user is created
-    if created:
-        Profile.objects.create(
-            user=user,
-            age=user.age if hasattr(user, 'age') else 2,
-            gender=user.gender if hasattr(user, 'gender') else 2
-        )
-    else:
+    if not created:
         # Update allauth emailaddress if exists
         try:
             email_address = EmailAddress.objects.get_primary(user)

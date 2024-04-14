@@ -60,8 +60,10 @@ class CustomSignupForm(SignupForm):
 
     def save(self, request):
         user = super(CustomSignupForm, self).save(request)
-        user.age = self.cleaned_data['age']
-        user.gender = self.cleaned_data['gender']
-        user.save()
+        Profile.objects.create(
+            user=user,
+            age=self.cleaned_data['age'],
+            gender=self.cleaned_data['gender']
+        )
 
         return user
