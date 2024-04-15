@@ -11,18 +11,22 @@ class Question(models.Model):
         return f"{self.content} - {self.mbtidic}"
 
 class MBTIResult(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="mbti")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="mbti")
     type_code = models.CharField(max_length=4, default='MBTI')
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"{self.type_code} - {self.type_code}"
+        return f"{self.user} - {self.type_code}"
 
-class MBTIResponse(MBTIResult):
+class MBTIResponse(models.Model):
+    mbtiresult = models.ForeignKey(
+        MBTIResult, on_delete=models.CASCADE, related_name="mbti_result"
+    )
     question = models.ForeignKey(
         Question, on_delete=models.CASCADE, related_name="mbti_questions"
     )
+    created_at = models.DateTimeField(auto_now_add=True)
     answer = models.CharField(max_length=1)  # 예: 'E', 'I', 'N', 'S', 등등
 
     def __str__(self):
-        return f"{self.user.username} - {self.question} - {self.answer}"
+        return f"{self.mbtiresult} - {self.question} - {self.answer}"

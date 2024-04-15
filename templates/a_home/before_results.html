@@ -1,0 +1,31 @@
+{% extends 'layouts/box.html' %}
+{% block content %}
+
+
+
+
+
+<div class="flex flex-col items-center justify-center">
+    <h2>당신의 MBTI</h2>
+    {% for result_id, info in mbti_summary.items %}
+        <div class="flex flex-col items-center justify-center">
+            <h3>{{ info.MBTI }}</h3>
+            <ul class="flex">
+                <li class="mx-4">E: {{ info.detail.E }}</li>
+                <li class="mx-4">I: {{ info.detail.I }}</li>
+                <li class="mx-4">S: {{ info.detail.S }}</li>
+                <li class="mx-4">N: {{ info.detail.N }}</li>
+                <li class="mx-4">T: {{ info.detail.T }}</li>
+                <li class="mx-4">F: {{ info.detail.F }}</li>
+                <li class="mx-4">J: {{ info.detail.J }}</li>
+                <li class="mx-4">P: {{ info.detail.P }}</li>
+            </ul>
+        </div>
+    {% endfor %}
+
+        <h2></h2>
+        <div class="flex items-center justify-center">
+            <a class="button mx-4 my-4" href="{% url 'profile-results' %}">결과보기</a>
+        </div>
+    </div>
+{% endblock %}
