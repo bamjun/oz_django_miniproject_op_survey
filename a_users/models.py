@@ -14,7 +14,7 @@ class Profile(models.Model):
     image = models.ImageField(upload_to='avatars/', null=True, blank=True)
     displayname = models.CharField(max_length=20, null=True, blank=True)
     info = models.TextField(null=True, blank=True)
-    age = models.IntegerField()
+    age = models.IntegerField(default=0)
     gender = models.IntegerField(choices=GENDER_CHOICES)
     created_at = models.DateTimeField(auto_now_add=True)
 

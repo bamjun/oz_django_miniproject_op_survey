@@ -1,0 +1,16 @@
+{% extends 'layouts/box.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="flex flex-col items-center justify-center">
+    <h2>총 문항수를 선택해주세요.</h2>
+    <h2>문항수가 많을수록 정확도가 높아집니다.</h2>
+    <div class="flex items-center justify-center">
+        <a class="button mx-4 my-4" href="5/">20 문제</a>
+        <a class="button mx-4 my-4" href="15/">60 문제</a>
+        <a class="button mx-4 my-4" href="30/">120 문제</a>
+    </div>
+</div>
+
+{% endblock %}
