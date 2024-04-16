@@ -1,4 +1,5 @@
-![alt text](images/markdown-mbti.gif)
+![alt text](images/markdown-mbti-low.gif)
+
 # 미니 프로젝트 - 테스트  
 
 # todo
