@@ -56,6 +56,7 @@ def surveyview(request, num_question):
             user=user, 
             type_code="MBTI"
         )
+        print(mbti_result, created)
         question_id = request.POST.get('question_id')
         current_question = Question.objects.get(id=question_id)
         
@@ -82,6 +83,7 @@ def surveyview(request, num_question):
 @login_required
 def before_results(request):
     user = request.user
+    user = User.objects.get(username=request.user)
     results = MBTIResult.objects.filter(user=user, type_code="MBTI")
     
     mbti_summary = {}
@@ -113,7 +115,7 @@ def before_results(request):
             'detail': dimension_count
         }
 
-    MBTIResult.objects.update(user=user, type_code=full_mbti_type)
+    # MBTIResult.objects.update(user=user, type_code=full_mbti_type)
 
     return render(request, "a_home/before_results.html", {'mbti_summary': mbti_summary})
 

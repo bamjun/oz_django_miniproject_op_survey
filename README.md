@@ -1,3 +1,5 @@
+![alt text](images/markdown-mbti-ezgif.com-crop.gif)
+
 # 미니 프로젝트 - 테스트  
 
 # todo
